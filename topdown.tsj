@@ -1,0 +1,14 @@
+{ "columns":8,
+ "image":"microFantasy.v0.4\/microFantasy.v0.4\/tilesets\/topdown.png",
+ "imageheight":64,
+ "imagewidth":64,
+ "margin":0,
+ "name":"topdown",
+ "spacing":0,
+ "tilecount":64,
+ "tiledversion":"1.11.0",
+ "tileheight":8,
+ "tilewidth":8,
+ "type":"tileset",
+ "version":"1.10"
+}

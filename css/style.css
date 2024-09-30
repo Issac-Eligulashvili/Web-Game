@@ -1,0 +1,161 @@
+body,
+html {
+     height: 100vh;
+     width: 100%;
+     justify-content: center;
+     align-items: center;
+     display: flex;
+}
+
+body {
+     transition: opacity 0.5s ease-in-out;
+     opacity: 1;
+}
+
+.fade-out {
+     opacity: 0;
+}
+
+#container {
+     position: relative;
+     width: 100%;
+     height: 100%;
+     border: solid 2px black;
+     overflow: hidden;
+}
+
+#object {
+     position: absolute;
+     top: 430px;
+     left: 330px;
+     width: 20px;
+     height: 20px;
+
+     border-radius: 0%;
+     background-image: url(/img/sprites/blue-shroomie-sprite-sheet\ \(1\).png);
+     background-repeat: no-repeat;
+     background-size: cover;
+     background-position: 0, 2px;
+     border: solid 1px black;
+
+}
+
+#object.idle {
+     animation: idle .5s steps(2) infinite;
+}
+
+#floor {
+     position: absolute;
+     bottom: 0;
+     left: 0;
+     width: 100%;
+     height: 20px;
+     background-color: #2ecc71;
+}
+
+#ceiling {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 20px;
+     background-color: #2ecc71;
+}
+
+#wall {
+     position: absolute;
+     top: 30%;
+     left: 20%;
+     width: 8px;
+     height: 56px;
+     background-color: #2ecc71;
+}
+
+#wall2 {
+     position: absolute;
+     top: calc(30% - 56px);
+     left: 20%;
+     width: 8px;
+     height: 56px;
+     background-color: #2ecc71;
+}
+
+#wipe-container {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     display: grid;
+     pointer-events: none;
+     z-index: 900;
+}
+
+.square {
+     background-color: black;
+     opacity: 0;
+     animation-fill-mode: forwards;
+     /* Animation will be added dynamically */
+}
+
+/* Change Timeline UI */
+
+.changeContainer {
+     position: absolute;
+     height: 100%;
+     width: 100%;
+     justify-content: center;
+     align-items: center;
+     display: flex;
+     z-index: 100;
+     filter: none;
+}
+
+.timelineBtn {
+     background-color: blue;
+     padding: 15px;
+     border-radius: 15px;
+}
+
+.timelineBtn:hover {
+     cursor: pointer;
+     background-color: red;
+}
+
+@keyframes clearSquare {
+     to {
+          opacity: 0;
+     }
+}
+
+@keyframes fillSquare {
+     to {
+          opacity: 1;
+     }
+}
+
+@keyframes idle {
+     0% {
+          background-position: 0% 2px;
+     }
+
+     100% {
+          background-position: 200% 2px;
+     }
+}
+
+@keyframes run {}
+
+.h-1 {
+     height: 1px;
+}
+
+svg {
+     width: 100%;
+     height: 100%;
+     pointer-events: none;
+}
+
+.timeline2 {
+     filter: grayscale(100%);
+}

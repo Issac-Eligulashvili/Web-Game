@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="timeline2">
 
 <head>
      <title>Timelock</title>
@@ -15,7 +15,7 @@
 </head>
 
 <body>
-     <!-- change timeline UI -->
+     <!-- change timelines UI -->
      <div class="changeContainer" style="display: none;">
           <div class="changeModel w-100 text-center">
                <h1>Choose Your Timeline</h1>
@@ -48,13 +48,27 @@
           <div id="wipe-container"></div>
           <div id="object" class="idle">
           </div>
-          <div id="floor" class="wall"></div>
-          <div id="ceiling" class="wall"></div>
-          <div id="wall" class="wall"></div>
-          <div id="wall2" class="wall"></div>
-
-          <div id="svgContainer"></div>
+          <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+               <title>New Project</title>
+               <style>
+                    .s0 {
+                         fill: #000000
+                    }
+               </style>
+               <path id="Shape 1" class="s0 collidable" d="m933 861v97h-367v-97z" />
+          </svg>
+          <div id="floor" class="collidable"></div>
      </div>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -72,9 +86,6 @@
           integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
      <!-- Collisions -->
      <script src="/js/physics.js"></script>
-
-     <!-- Generate tilemap -->
-     <script src="/js/tilemapToSVG.js"></script>
 
      <!-- My JS -->
      <script src="/js/script.js"></script>

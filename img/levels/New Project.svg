@@ -1,0 +1,8 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+	<title>New Project</title>
+	<style>
+		.s0 { fill: #000000 } 
+	</style>
+	<path id="Shape 1 collidable" class="s0" d="m933 861v97h-367v-97z"/>
+	<path id="Shape 2 collidable" class="s0" d="m1751 691v137h-517v-137z"/>
+</svg>
