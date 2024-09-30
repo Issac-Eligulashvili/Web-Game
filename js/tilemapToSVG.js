@@ -6,6 +6,8 @@ function tilemapToSVG(tilemap) {
      const svgFooter = '</svg>';
      let svgDefs = '<defs>\n';  // Collect all the patterns in the <defs> section
      let paths = '';
+     const svgDefsArray = [];
+     const pathsArray = [];
 
      // Assume the first layer is the one to render
      layers.forEach(l => {
@@ -43,7 +45,7 @@ function tilemapToSVG(tilemap) {
                     }
 
                     // Create a rectangle for each tile (you can customize this part for different tile designs)
-                    paths += `<rect x="${posX}" y="${posY}" width="${tileWidth}" height="${tileHeight}" fill="url(#${patternId})" stroke="none" ${wallClass}/>\n`;
+                    pathsArray.push(`<rect x="${posX}" y="${posY}" width="${tileWidth}" height="${tileHeight}" fill="url(#${patternId})" stroke="none" ${wallClass}/>\n`);
                }
           }
      });
