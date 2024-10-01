@@ -1,57 +1,77 @@
+
 function tilemapToSVG(tilemap) {
      const { width, height, layers } = tilemap;
      const tileWidth = 8; // Assuming each tile is 32x32 pixels
      const tileHeight = 8;
      const svgHeader = `<svg xmlns="http://www.w3.org/2000/svg" width="${width * tileWidth}" height="${height * tileHeight}">\n`;
      const svgFooter = '</svg>';
-     let svgDefs = '<defs>\n';  // Collect all the patterns in the <defs> section
-     let paths = '';
+
+     // Collect all the patterns in the <defs> section
      const svgDefsArray = [];
      const pathsArray = [];
 
+     const patternSet = new Set();
+     const processedTiles = new Array(width * height).fill(false);
+
+     console.time("tilemapToSVG");
+
      // Assume the first layer is the one to render
      layers.forEach(l => {
-          layer = l.data;
-          for (let y = 0; y < height; y++) {
-               for (let x = 0; x < width; x++) {
-                    const tileIndex = y * width + x;
-                    const tileId = layer[tileIndex];
-
-                    // Skip empty tiles (0)
-                    if (tileId === 0) continue;
+          const layer = l.data; //Extract the layer data;
 
 
+          for (let y = 0; y < height; y++) { //Loop over entire tilemap row by row
+               let x = 0;
+               while (x < width) {
+                    const tileIndex = y * width + x; //getting the index in the array of the tile being currently made
+                    const tileId = layer[tileIndex]; //setting the ID of that tile to the value of that tile
 
-                    // Calculate the position of the tile
-                    const posX = x * tileWidth;
-                    const posY = y * tileHeight;
+                    //skip empty tiles
+                    if (tileId === 0 || processedTiles[tileIndex]) {
+                         x++;
+                         continue
+                    }
 
+                    //calculate position of the tile;
+                    let posX = x * tileWidth;
+                    let posY = y * tileHeight;
+
+                    //check for the same tileID consecutively
+                    let spanX = 1;
+
+                    while (x + spanX < width && layer[y * width + (x + spanX)] === tileId) { //while the rectangle is less than the width && the ID of the tile next to it (x+spanX) is the same as the id of the current tile                         spanX++;
+                         spanX++;
+                    }
+
+                    //Pattern ID for this tile;
                     const patternId = `imgPattern-${tileId - 1}`;
 
-                    if (!svgDefs.includes(`id="${patternId}"`)) {
-                         svgDefs += `
-                         <pattern id="${patternId}" patternUnits="userSpaceOnUse" width="${tileWidth}" height="${tileHeight}">
-                             <image href="/img/tilemap pictures/topdown_Layer-${tileId - 1}.png" x="0" y="0" width="${tileWidth}" height="${tileHeight}" />
-                         </pattern>\n`;
+                    // Only add the pattern if it hasn't been added before
+                    if (!patternSet.has(patternId)) {
+                         svgDefsArray.push(`
+                    <pattern id="${patternId}" patternUnits="userSpaceOnUse" width="${tileWidth}" height="${tileHeight}">
+                        <image href="/img/tilemap pictures/topdown_Layer-${tileId - 1}.png" x="0" y="0" width="${tileWidth}" height="${tileHeight}" />
+                    </pattern>\n`);
+                         patternSet.add(patternId); // Mark this pattern as added
                     }
 
-                    //determine if tile is a wall
-                    let wallClass = '';
+                    const wallClass = ([2, 3, 4, 5, 6, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 21, 22].includes(tileId)) ? 'class="wall"' : '';
 
-                    if ([2, 3, 4, 5, 6, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 21, 22].includes(tileId)) {
-                         wallClass = 'class="wall"'
-                    } else {
-                         wallClass = '';
-                    }
+                    pathsArray.push(`<rect x="${posX}" y="${posY}" width="${spanX * tileWidth}" height="${tileHeight}" fill="url(#${patternId})" stroke="none" ${wallClass}/>\n`);
 
-                    // Create a rectangle for each tile (you can customize this part for different tile designs)
-                    pathsArray.push(`<rect x="${posX}" y="${posY}" width="${tileWidth}" height="${tileHeight}" fill="url(#${patternId})" stroke="none" ${wallClass}/>\n`);
+                    // Move to the next unprocessed tile in this row
+                    x += spanX;
+
                }
           }
      });
 
+     console.timeEnd("tilemapToSVG");
+
      // Close the defs and wrap up the SVG
-     svgDefs += '</defs>\n';
+
+     const paths = pathsArray.join('');
+     const svgDefs = `<defs>\n${svgDefsArray.join('')}</defs>\n`
 
      return svgHeader + svgDefs + paths + svgFooter;
 }
