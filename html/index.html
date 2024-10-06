@@ -45,18 +45,289 @@
      </div>
      <!-- Testing BG Collisions -->
      <div id="container">
-          <div id="wipe-container"></div>
-          <div id="object" class="idle">
-          </div>
-          <div id="floor" class="wall"></div>
-          <div id="ceiling" class="wall"></div>
+          <div class="grid">
+               <div id="object" class="idle">
+               </div>
+               <!-- <div id="floor" class=""></div>
+          <div id="ceiling" class=""></div>
           <div id="wall" class="wall"></div>
-          <div id="wall2" class="wall"></div>
+          <div id="wall2" class="wall"></div> -->
+               <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" id="tileMap">
+                    <g id="layer_0">
+                         <image x="960" y="224" width="64" height="64" href="/pixil-frame-0.png" id="tile_15_0" />
+                         <image x="928" y="240" width="64" height="64" href="/pixil-frame-0.png" id="tile_15_1" />
+                         <image x="896" y="256" width="64" height="64" href="/pixil-frame-0.png" id="tile_15_2" />
+                         <image x="864" y="272" width="64" height="64" href="/pixil-frame-0.png" id="tile_15_3" />
+                         <image x="832" y="288" width="64" height="64" href="/pixil-frame-0.png" id="tile_15_4" />
+                         <image x="800" y="304" width="64" height="64" href="/pixil-frame-0.png" id="tile_15_5" />
+                         <image x="768" y="320" width="64" height="64" href="/pixil-frame-0.png" id="tile_15_6" />
+                         <image x="736" y="336" width="64" height="64" href="/pixil-frame-0.png" id="tile_15_7" />
+                         <image x="704" y="352" width="64" height="64" href="/pixil-frame-0.png" id="tile_15_8" />
+                         <image x="672" y="368" width="64" height="64" href="/pixil-frame-0.png" id="tile_15_9" />
+                         <image x="640" y="384" width="64" height="64" href="/pixil-frame-0.png" id="tile_15_10" />
+                         <image x="608" y="400" width="64" height="64" href="/pixil-frame-0.png" id="tile_15_11" />
+                         <image x="576" y="416" width="64" height="64" href="/pixil-frame-0.png" id="tile_15_12" />
+                         <image x="544" y="432" width="64" height="64" href="/pixil-frame-0.png" id="tile_15_13" />
+                         <image x="512" y="448" width="64" height="64" href="/pixil-frame-0.png" id="tile_15_14" />
+                         <image x="0" y="224" width="64" height="64" href="/pixil-frame-0.png" id="tile_0_15" />
+                         <image x="32" y="240" width="64" height="64" href="/pixil-frame-0.png" id="tile_1_15" />
+                         <image x="64" y="256" width="64" height="64" href="/pixil-frame-0.png" id="tile_2_15" />
+                         <image x="96" y="272" width="64" height="64" href="/pixil-frame-0.png" id="tile_3_15" />
+                         <image x="128" y="288" width="64" height="64" href="/pixil-frame-0.png" id="tile_4_15" />
+                         <image x="160" y="304" width="64" height="64" href="/pixil-frame-0.png" id="tile_5_15" />
+                         <image x="192" y="320" width="64" height="64" href="/pixil-frame-0.png" id="tile_6_15" />
+                         <image x="224" y="336" width="64" height="64" href="/pixil-frame-0.png" id="tile_7_15" />
+                         <image x="256" y="352" width="64" height="64" href="/pixil-frame-0.png" id="tile_8_15" />
+                         <image x="288" y="368" width="64" height="64" href="/pixil-frame-0.png" id="tile_9_15" />
+                         <image x="320" y="384" width="64" height="64" href="/pixil-frame-0.png" id="tile_10_15" />
+                         <image x="352" y="400" width="64" height="64" href="/pixil-frame-0.png" id="tile_11_15" />
+                         <image x="384" y="416" width="64" height="64" href="/pixil-frame-0.png" id="tile_12_15" />
+                         <image x="416" y="432" width="64" height="64" href="/pixil-frame-0.png" id="tile_13_15" />
+                         <image x="448" y="448" width="64" height="64" href="/pixil-frame-0.png" id="tile_14_15" />
+                         <image x="480" y="464" width="64" height="64" href="/pixil-frame-0.png" id="tile_15_15" />
+                    </g>
+                    <g id="layer_1">
+                         <image x="480" y="-16" width="64" height="64" href="/blocks_9.png" id="tile_0_0" />
+                         <image x="512" y="0" width="64" height="64" href="/blocks_9.png" id="tile_1_0" />
+                         <image x="544" y="16" width="64" height="64" href="/blocks_9.png" id="tile_2_0" />
+                         <image x="576" y="32" width="64" height="64" href="/blocks_9.png" id="tile_3_0" />
+                         <image x="608" y="48" width="64" height="64" href="/blocks_9.png" id="tile_4_0" />
+                         <image x="640" y="64" width="64" height="64" href="/blocks_9.png" id="tile_5_0" />
+                         <image x="672" y="80" width="64" height="64" href="/blocks_9.png" id="tile_6_0" />
+                         <image x="704" y="96" width="64" height="64" href="/blocks_9.png" id="tile_7_0" />
+                         <image x="736" y="112" width="64" height="64" href="/blocks_9.png" id="tile_8_0" />
+                         <image x="768" y="128" width="64" height="64" href="/blocks_9.png" id="tile_9_0" />
+                         <image x="800" y="144" width="64" height="64" href="/blocks_9.png" id="tile_10_0" />
+                         <image x="832" y="160" width="64" height="64" href="/blocks_9.png" id="tile_11_0" />
+                         <image x="864" y="176" width="64" height="64" href="/blocks_9.png" id="tile_12_0" />
+                         <image x="896" y="192" width="64" height="64" href="/blocks_9.png" id="tile_13_0" />
+                         <image x="448" y="0" width="64" height="64" href="/blocks_9.png" id="tile_0_1" />
+                         <image x="480" y="16" width="64" height="64" href="/blocks_9.png" id="tile_1_1" />
+                         <image x="512" y="32" width="64" height="64" href="/blocks_9.png" id="tile_2_1" />
+                         <image x="544" y="48" width="64" height="64" href="/blocks_9.png" id="tile_3_1" />
+                         <image x="576" y="64" width="64" height="64" href="/blocks_9.png" id="tile_4_1" />
+                         <image x="608" y="80" width="64" height="64" href="/blocks_9.png" id="tile_5_1" />
+                         <image x="640" y="96" width="64" height="64" href="/blocks_9.png" id="tile_6_1" />
+                         <image x="672" y="112" width="64" height="64" href="/blocks_9.png" id="tile_7_1" />
+                         <image x="704" y="128" width="64" height="64" href="/blocks_9.png" id="tile_8_1" />
+                         <image x="736" y="144" width="64" height="64" href="/blocks_9.png" id="tile_9_1" />
+                         <image x="768" y="160" width="64" height="64" href="/blocks_9.png" id="tile_10_1" />
+                         <image x="800" y="176" width="64" height="64" href="/blocks_9.png" id="tile_11_1" />
+                         <image x="832" y="192" width="64" height="64" href="/blocks_9.png" id="tile_12_1" />
+                         <image x="864" y="208" width="64" height="64" href="/blocks_9.png" id="tile_13_1" />
+                         <image x="416" y="16" width="64" height="64" href="/blocks_9.png" id="tile_0_2" />
+                         <image x="448" y="32" width="64" height="64" href="/blocks_9.png" id="tile_1_2" />
+                         <image x="480" y="48" width="64" height="64" href="/blocks_9.png" id="tile_2_2" />
+                         <image x="512" y="64" width="64" height="64" href="/blocks_9.png" id="tile_3_2" />
+                         <image x="544" y="80" width="64" height="64" href="/blocks_9.png" id="tile_4_2" />
+                         <image x="576" y="96" width="64" height="64" href="/blocks_9.png" id="tile_5_2" />
+                         <image x="608" y="112" width="64" height="64" href="/blocks_9.png" id="tile_6_2" />
+                         <image x="640" y="128" width="64" height="64" href="/blocks_9.png" id="tile_7_2" />
+                         <image x="672" y="144" width="64" height="64" href="/blocks_9.png" id="tile_8_2" />
+                         <image x="704" y="160" width="64" height="64" href="/blocks_9.png" id="tile_9_2" />
+                         <image x="736" y="176" width="64" height="64" href="/blocks_9.png" id="tile_10_2" />
+                         <image x="768" y="192" width="64" height="64" href="/blocks_9.png" id="tile_11_2" />
+                         <image x="800" y="208" width="64" height="64" href="/blocks_9.png" id="tile_12_2" />
+                         <image x="832" y="224" width="64" height="64" href="/blocks_9.png" id="tile_13_2" />
+                         <image x="384" y="32" width="64" height="64" href="/blocks_9.png" id="tile_0_3" />
+                         <image x="416" y="48" width="64" height="64" href="/blocks_9.png" id="tile_1_3" />
+                         <image x="448" y="64" width="64" height="64" href="/blocks_9.png" id="tile_2_3" />
+                         <image x="480" y="80" width="64" height="64" href="/blocks_9.png" id="tile_3_3" />
+                         <image x="512" y="96" width="64" height="64" href="/blocks_9.png" id="tile_4_3" />
+                         <image x="544" y="112" width="64" height="64" href="/blocks_9.png" id="tile_5_3" />
+                         <image x="576" y="128" width="64" height="64" href="/blocks_9.png" id="tile_6_3" />
+                         <image x="608" y="144" width="64" height="64" href="/blocks_9.png" id="tile_7_3" />
+                         <image x="640" y="160" width="64" height="64" href="/blocks_9.png" id="tile_8_3" />
+                         <image x="672" y="176" width="64" height="64" href="/blocks_9.png" id="tile_9_3" />
+                         <image x="704" y="192" width="64" height="64" href="/blocks_9.png" id="tile_10_3" />
+                         <image x="736" y="208" width="64" height="64" href="/blocks_9.png" id="tile_11_3" />
+                         <image x="768" y="224" width="64" height="64" href="/blocks_9.png" id="tile_12_3" />
+                         <image x="800" y="240" width="64" height="64" href="/blocks_9.png" id="tile_13_3" />
+                         <image x="832" y="256" width="64" height="64" href="/blocks_9.png" id="tile_14_3" />
+                         <image x="352" y="48" width="64" height="64" href="/blocks_9.png" id="tile_0_4" />
+                         <image x="384" y="64" width="64" height="64" href="/blocks_9.png" id="tile_1_4" />
+                         <image x="416" y="80" width="64" height="64" href="/blocks_9.png" id="tile_2_4" />
+                         <image x="448" y="96" width="64" height="64" href="/blocks_9.png" id="tile_3_4" />
+                         <image x="480" y="112" width="64" height="64" href="/blocks_9.png" id="tile_4_4" />
+                         <image x="512" y="128" width="64" height="64" href="/blocks_9.png" id="tile_5_4" />
+                         <image x="544" y="144" width="64" height="64" href="/blocks_9.png" id="tile_6_4" />
+                         <image x="576" y="160" width="64" height="64" href="/blocks_9.png" id="tile_7_4" />
+                         <image x="608" y="176" width="64" height="64" href="/blocks_9.png" id="tile_8_4" />
+                         <image x="640" y="192" width="64" height="64" href="/blocks_9.png" id="tile_9_4" />
+                         <image x="672" y="208" width="64" height="64" href="/blocks_9.png" id="tile_10_4" />
+                         <image x="704" y="224" width="64" height="64" href="/blocks_9.png" id="tile_11_4" />
+                         <image x="736" y="240" width="64" height="64" href="/blocks_9.png" id="tile_12_4" />
+                         <image x="768" y="256" width="64" height="64" href="/blocks_9.png" id="tile_13_4" />
+                         <image x="800" y="272" width="64" height="64" href="/blocks_9.png" id="tile_14_4" />
+                         <image x="320" y="64" width="64" height="64" href="/blocks_9.png" id="tile_0_5" />
+                         <image x="352" y="80" width="64" height="64" href="/blocks_9.png" id="tile_1_5" />
+                         <image x="384" y="96" width="64" height="64" href="/blocks_9.png" id="tile_2_5" />
+                         <image x="416" y="112" width="64" height="64" href="/blocks_9.png" id="tile_3_5" />
+                         <image x="448" y="128" width="64" height="64" href="/blocks_9.png" id="tile_4_5" />
+                         <image x="480" y="144" width="64" height="64" href="/blocks_9.png" id="tile_5_5" />
+                         <image x="512" y="160" width="64" height="64" href="/blocks_9.png" id="tile_6_5" />
+                         <image x="544" y="176" width="64" height="64" href="/blocks_9.png" id="tile_7_5" />
+                         <image x="576" y="192" width="64" height="64" href="/blocks_9.png" id="tile_8_5" />
+                         <image x="608" y="208" width="64" height="64" href="/blocks_9.png" id="tile_9_5" />
+                         <image x="640" y="224" width="64" height="64" href="/blocks_9.png" id="tile_10_5" />
+                         <image x="672" y="240" width="64" height="64" href="/blocks_9.png" id="tile_11_5" />
+                         <image x="704" y="256" width="64" height="64" href="/blocks_9.png" id="tile_12_5" />
+                         <image x="736" y="272" width="64" height="64" href="/blocks_9.png" id="tile_13_5" />
+                         <image x="288" y="80" width="64" height="64" href="/blocks_9.png" id="tile_0_6" />
+                         <image x="320" y="96" width="64" height="64" href="/blocks_9.png" id="tile_1_6" />
+                         <image x="352" y="112" width="64" height="64" href="/blocks_9.png" id="tile_2_6" />
+                         <image x="384" y="128" width="64" height="64" href="/blocks_9.png" id="tile_3_6" />
+                         <image x="416" y="144" width="64" height="64" href="/blocks_9.png" id="tile_4_6" />
+                         <image x="448" y="160" width="64" height="64" href="/blocks_9.png" id="tile_5_6" />
+                         <image x="480" y="176" width="64" height="64" href="/blocks_9.png" id="tile_6_6" />
+                         <image x="512" y="192" width="64" height="64" href="/blocks_9.png" id="tile_7_6" />
+                         <image x="544" y="208" width="64" height="64" href="/blocks_9.png" id="tile_8_6" />
+                         <image x="576" y="224" width="64" height="64" href="/blocks_9.png" id="tile_9_6" />
+                         <image x="608" y="240" width="64" height="64" href="/blocks_9.png" id="tile_10_6" />
+                         <image x="640" y="256" width="64" height="64" href="/blocks_9.png" id="tile_11_6" />
+                         <image x="672" y="272" width="64" height="64" href="/blocks_9.png" id="tile_12_6" />
+                         <image x="704" y="288" width="64" height="64" href="/blocks_9.png" id="tile_13_6" />
+                         <image x="256" y="96" width="64" height="64" href="/blocks_9.png" id="tile_0_7" />
+                         <image x="288" y="112" width="64" height="64" href="/blocks_9.png" id="tile_1_7" />
+                         <image x="320" y="128" width="64" height="64" href="/blocks_9.png" id="tile_2_7" />
+                         <image x="352" y="144" width="64" height="64" href="/blocks_9.png" id="tile_3_7" />
+                         <image x="384" y="160" width="64" height="64" href="/blocks_9.png" id="tile_4_7" />
+                         <image x="416" y="176" width="64" height="64" href="/blocks_9.png" id="tile_5_7" />
+                         <image x="448" y="192" width="64" height="64" href="/blocks_9.png" id="tile_6_7" />
+                         <image x="480" y="208" width="64" height="64" href="/blocks_9.png" id="tile_7_7" />
+                         <image x="512" y="224" width="64" height="64" href="/blocks_9.png" id="tile_8_7" />
+                         <image x="544" y="240" width="64" height="64" href="/blocks_9.png" id="tile_9_7" />
+                         <image x="576" y="256" width="64" height="64" href="/blocks_9.png" id="tile_10_7" />
+                         <image x="608" y="272" width="64" height="64" href="/blocks_9.png" id="tile_11_7" />
+                         <image x="640" y="288" width="64" height="64" href="/blocks_9.png" id="tile_12_7" />
+                         <image x="672" y="304" width="64" height="64" href="/blocks_9.png" id="tile_13_7" />
+                         <image x="224" y="112" width="64" height="64" href="/blocks_9.png" id="tile_0_8" />
+                         <image x="256" y="128" width="64" height="64" href="/blocks_9.png" id="tile_1_8" />
+                         <image x="288" y="144" width="64" height="64" href="/blocks_9.png" id="tile_2_8" />
+                         <image x="320" y="160" width="64" height="64" href="/blocks_9.png" id="tile_3_8" />
+                         <image x="352" y="176" width="64" height="64" href="/blocks_9.png" id="tile_4_8" />
+                         <image x="384" y="192" width="64" height="64" href="/blocks_9.png" id="tile_5_8" />
+                         <image x="416" y="208" width="64" height="64" href="/blocks_9.png" id="tile_6_8" />
+                         <image x="448" y="224" width="64" height="64" href="/blocks_9.png" id="tile_7_8" />
+                         <image x="480" y="240" width="64" height="64" href="/blocks_9.png" id="tile_8_8" />
+                         <image x="512" y="256" width="64" height="64" href="/blocks_9.png" id="tile_9_8" />
+                         <image x="544" y="272" width="64" height="64" href="/blocks_9.png" id="tile_10_8" />
+                         <image x="576" y="288" width="64" height="64" href="/blocks_9.png" id="tile_11_8" />
+                         <image x="608" y="304" width="64" height="64" href="/blocks_9.png" id="tile_12_8" />
+                         <image x="640" y="320" width="64" height="64" href="/blocks_9.png" id="tile_13_8" />
+                         <image x="192" y="128" width="64" height="64" href="/blocks_9.png" id="tile_0_9" />
+                         <image x="224" y="144" width="64" height="64" href="/blocks_9.png" id="tile_1_9" />
+                         <image x="256" y="160" width="64" height="64" href="/blocks_9.png" id="tile_2_9" />
+                         <image x="288" y="176" width="64" height="64" href="/blocks_9.png" id="tile_3_9" />
+                         <image x="320" y="192" width="64" height="64" href="/blocks_9.png" id="tile_4_9" />
+                         <image x="352" y="208" width="64" height="64" href="/blocks_9.png" id="tile_5_9" />
+                         <image x="384" y="224" width="64" height="64" href="/blocks_9.png" id="tile_6_9" />
+                         <image x="416" y="240" width="64" height="64" href="/blocks_9.png" id="tile_7_9" />
+                         <image x="448" y="256" width="64" height="64" href="/blocks_9.png" id="tile_8_9" />
+                         <image x="480" y="272" width="64" height="64" href="/blocks_9.png" id="tile_9_9" />
+                         <image x="512" y="288" width="64" height="64" href="/blocks_9.png" id="tile_10_9" />
+                         <image x="544" y="304" width="64" height="64" href="/blocks_9.png" id="tile_11_9" />
+                         <image x="576" y="320" width="64" height="64" href="/blocks_9.png" id="tile_12_9" />
+                         <image x="608" y="336" width="64" height="64" href="/blocks_9.png" id="tile_13_9" />
+                         <image x="160" y="144" width="64" height="64" href="/blocks_9.png" id="tile_0_10" />
+                         <image x="192" y="160" width="64" height="64" href="/blocks_9.png" id="tile_1_10" />
+                         <image x="224" y="176" width="64" height="64" href="/blocks_9.png" id="tile_2_10" />
+                         <image x="256" y="192" width="64" height="64" href="/blocks_9.png" id="tile_3_10" />
+                         <image x="288" y="208" width="64" height="64" href="/blocks_9.png" id="tile_4_10" />
+                         <image x="320" y="224" width="64" height="64" href="/blocks_9.png" id="tile_5_10" />
+                         <image x="352" y="240" width="64" height="64" href="/blocks_9.png" id="tile_6_10" />
+                         <image x="384" y="256" width="64" height="64" href="/blocks_9.png" id="tile_7_10" />
+                         <image x="416" y="272" width="64" height="64" href="/blocks_9.png" id="tile_8_10" />
+                         <image x="448" y="288" width="64" height="64" href="/blocks_9.png" id="tile_9_10" />
+                         <image x="480" y="304" width="64" height="64" href="/blocks_9.png" id="tile_10_10" />
+                         <image x="512" y="320" width="64" height="64" href="/blocks_9.png" id="tile_11_10" />
+                         <image x="544" y="336" width="64" height="64" href="/blocks_9.png" id="tile_12_10" />
+                         <image x="576" y="352" width="64" height="64" href="/blocks_9.png" id="tile_13_10" />
+                         <image x="128" y="160" width="64" height="64" href="/blocks_9.png" id="tile_0_11" />
+                         <image x="160" y="176" width="64" height="64" href="/blocks_9.png" id="tile_1_11" />
+                         <image x="192" y="192" width="64" height="64" href="/blocks_9.png" id="tile_2_11" />
+                         <image x="224" y="208" width="64" height="64" href="/blocks_9.png" id="tile_3_11" />
+                         <image x="256" y="224" width="64" height="64" href="/blocks_9.png" id="tile_4_11" />
+                         <image x="288" y="240" width="64" height="64" href="/blocks_9.png" id="tile_5_11" />
+                         <image x="320" y="256" width="64" height="64" href="/blocks_9.png" id="tile_6_11" />
+                         <image x="352" y="272" width="64" height="64" href="/blocks_9.png" id="tile_7_11" />
+                         <image x="384" y="288" width="64" height="64" href="/blocks_9.png" id="tile_8_11" />
+                         <image x="416" y="304" width="64" height="64" href="/blocks_9.png" id="tile_9_11" />
+                         <image x="448" y="320" width="64" height="64" href="/blocks_9.png" id="tile_10_11" />
+                         <image x="480" y="336" width="64" height="64" href="/blocks_9.png" id="tile_11_11" />
+                         <image x="512" y="352" width="64" height="64" href="/blocks_9.png" id="tile_12_11" />
+                         <image x="544" y="368" width="64" height="64" href="/blocks_9.png" id="tile_13_11" />
+                         <image x="96" y="176" width="64" height="64" href="/blocks_9.png" id="tile_0_12" />
+                         <image x="128" y="192" width="64" height="64" href="/blocks_9.png" id="tile_1_12" />
+                         <image x="160" y="208" width="64" height="64" href="/blocks_9.png" id="tile_2_12" />
+                         <image x="192" y="224" width="64" height="64" href="/blocks_9.png" id="tile_3_12" />
+                         <image x="224" y="240" width="64" height="64" href="/blocks_9.png" id="tile_4_12" />
+                         <image x="256" y="256" width="64" height="64" href="/blocks_9.png" id="tile_5_12" />
+                         <image x="288" y="272" width="64" height="64" href="/blocks_9.png" id="tile_6_12" />
+                         <image x="320" y="288" width="64" height="64" href="/blocks_9.png" id="tile_7_12" />
+                         <image x="352" y="304" width="64" height="64" href="/blocks_9.png" id="tile_8_12" />
+                         <image x="384" y="320" width="64" height="64" href="/blocks_9.png" id="tile_9_12" />
+                         <image x="416" y="336" width="64" height="64" href="/blocks_9.png" id="tile_10_12" />
+                         <image x="448" y="352" width="64" height="64" href="/blocks_9.png" id="tile_11_12" />
+                         <image x="480" y="368" width="64" height="64" href="/blocks_9.png" id="tile_12_12" />
+                         <image x="512" y="384" width="64" height="64" href="/blocks_9.png" id="tile_13_12" />
+                         <image x="64" y="192" width="64" height="64" href="/blocks_9.png" id="tile_0_13" />
+                         <image x="96" y="208" width="64" height="64" href="/blocks_9.png" id="tile_1_13" />
+                         <image x="128" y="224" width="64" height="64" href="/blocks_9.png" id="tile_2_13" />
+                         <image x="160" y="240" width="64" height="64" href="/blocks_9.png" id="tile_3_13" />
+                         <image x="192" y="256" width="64" height="64" href="/blocks_9.png" id="tile_4_13" />
+                         <image x="224" y="272" width="64" height="64" href="/blocks_9.png" id="tile_5_13" />
+                         <image x="256" y="288" width="64" height="64" href="/blocks_9.png" id="tile_6_13" />
+                         <image x="288" y="304" width="64" height="64" href="/blocks_9.png" id="tile_7_13" />
+                         <image x="320" y="320" width="64" height="64" href="/blocks_9.png" id="tile_8_13" />
+                         <image x="352" y="336" width="64" height="64" href="/blocks_9.png" id="tile_9_13" />
+                         <image x="384" y="352" width="64" height="64" href="/blocks_9.png" id="tile_10_13" />
+                         <image x="416" y="368" width="64" height="64" href="/blocks_9.png" id="tile_11_13" />
+                         <image x="448" y="384" width="64" height="64" href="/blocks_9.png" id="tile_12_13" />
+                         <image x="480" y="400" width="64" height="64" href="/blocks_9.png" id="tile_13_13" />
+                    </g>
+                    <g id="layer_2">
+                         <image x="384" y="32" width="64" height="64" href="/blocks_96.png" id="tile_0_3" />
+                         <image x="416" y="48" width="64" height="64" href="/blocks_96.png" id="tile_1_3" />
+                         <image x="448" y="64" width="64" height="64" href="/blocks_96.png" id="tile_2_3" />
+                         <image x="480" y="80" width="64" height="64" href="/blocks_96.png" id="tile_3_3" />
+                         <image x="512" y="96" width="64" height="64" href="/blocks_96.png" id="tile_4_3" />
+                         <image x="544" y="112" width="64" height="64" href="/blocks_96.png" id="tile_5_3" />
+                         <image x="352" y="48" width="64" height="64" href="/blocks_96.png" id="tile_0_4" />
+                         <image x="384" y="64" width="64" height="64" href="/blocks_96.png" id="tile_1_4" />
+                         <image x="416" y="80" width="64" height="64" href="/blocks_96.png" id="tile_2_4" />
+                         <image x="448" y="96" width="64" height="64" href="/blocks_96.png" id="tile_3_4" />
+                         <image x="480" y="112" width="64" height="64" href="/blocks_96.png" id="tile_4_4" />
+                         <image x="512" y="128" width="64" height="64" href="/blocks_96.png" id="tile_5_4" />
+                         <image x="640" y="192" width="64" height="64" href="/blocks_96.png" id="tile_9_4" />
+                         <image x="672" y="208" width="64" height="64" href="/blocks_96.png" id="tile_10_4" />
+                         <image x="448" y="128" width="64" height="64" href="/blocks_96.png" id="tile_4_5" />
+                         <image x="480" y="144" width="64" height="64" href="/blocks_96.png" id="tile_5_5" />
+                         <image x="608" y="208" width="64" height="64" href="/blocks_96.png" id="tile_9_5" />
+                         <image x="640" y="224" width="64" height="64" href="/blocks_96.png" id="tile_10_5" />
+                         <image x="416" y="144" width="64" height="64" href="/blocks_96.png" id="tile_4_6" />
+                         <image x="448" y="160" width="64" height="64" href="/blocks_96.png" id="tile_5_6" />
+                         <image x="576" y="224" width="64" height="64" href="/blocks_96.png" id="tile_9_6" />
+                         <image x="608" y="240" width="64" height="64" href="/blocks_96.png" id="tile_10_6" />
+                         <image x="384" y="160" width="64" height="64" href="/blocks_96.png" id="tile_4_7" />
+                         <image x="416" y="176" width="64" height="64" href="/blocks_96.png" id="tile_5_7" />
+                         <image x="352" y="176" width="64" height="64" href="/blocks_96.png" id="tile_4_8" />
+                         <image x="384" y="192" width="64" height="64" href="/blocks_96.png" id="tile_5_8" />
+                         <image x="320" y="192" width="64" height="64" href="/blocks_96.png" id="tile_4_9" />
+                         <image x="352" y="208" width="64" height="64" href="/blocks_96.png" id="tile_5_9" />
+                         <image x="288" y="208" width="64" height="64" href="/blocks_96.png" id="tile_4_10" />
+                         <image x="320" y="224" width="64" height="64" href="/blocks_96.png" id="tile_5_10" />
+                         <image x="256" y="224" width="64" height="64" href="/blocks_96.png" id="tile_4_11" />
+                         <image x="288" y="240" width="64" height="64" href="/blocks_96.png" id="tile_5_11" />
+                         <image x="224" y="240" width="64" height="64" href="/blocks_96.png" id="tile_4_12" />
+                         <image x="256" y="256" width="64" height="64" href="/blocks_96.png" id="tile_5_12" />
+                    </g>
+               </svg>
+          </div>
+          <!-- <div id="wipe-container"></div> -->
 
 
      </div>
-
-
 
 
      <!-- Bootstrap JavaScript Libraries -->
@@ -76,8 +347,17 @@
      <!-- Generate tilemap -->
      <script src="/js/tilemapToSVG.js"></script>
 
+     <!-- Handling Input Detection -->
+     <script src="/js/isoPhysics.js"></script>
+
+     <!-- Handling Input Detection -->
+     <script src="/js/inputDetection.js"></script>
+
      <!-- My JS -->
      <script src="/js/script.js"></script>
+
+
+
 </body>
 
 </html>

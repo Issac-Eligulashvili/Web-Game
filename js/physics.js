@@ -19,8 +19,8 @@ let collidedX = false;
 //storing object data
 let objProperties = {
      velocity: {
-          x: 3,
-          y: 2,
+          x: 32,
+          y: 16,
      },
      position: {
           x: 0,
@@ -40,8 +40,12 @@ function createHitboxes(object) {
      const obj = document.querySelector(`#${object}`);
      const detectorsContainer = $('<div></div>');
      detectorsContainer.addClass('position-relative w-100 h-100');
-     objProperties.position.x = parseInt($(`#${object}`).css('left'));
-     objProperties.position.y = parseInt($(`#${object}`).css('top'));
+     console.log(mode);
+     if (mode === 'topDown' || 'platformer') {
+          objProperties.position.x = parseInt($(`#${object}`).css('left'));
+          objProperties.position.y = parseInt($(`#${object}`).css('top'));
+     }
+
 
 
      $(`#${object}`).append(detectorsContainer);
@@ -91,13 +95,9 @@ function createHitboxes(object) {
 function fall(object, floor) {
 
      const obj = document.querySelector(`#${object}`);
-     const collidables = document.querySelectorAll(`.${floor}`);
+     console.log(obj);
+     const collidables = document.querySelectorAll(`#${floor}`);
      const referenceOffset = $('#container').offset();
-     const bounds = collidables[0].getBoundingClientRect();
-     collidableTop = Math.ceil(bounds.top + window.scrollY - referenceOffset.top);
-     collidableBottom = collidableTop + bounds.height;
-     collidableLeft = Math.ceil(bounds.left + window.scrollX - referenceOffset.left);
-     collidableRight = collidableLeft + bounds.width;
 
 
 
@@ -112,7 +112,7 @@ function fall(object, floor) {
           objProperties.position.y += objProperties.velocity.y;
 
           obj.style.top = `${objProperties.position.y}px`;
-          const bottom = $(`#${object}`).find('.bottomDetection').offset();
+          const bottom = $(`#${object}`).find('.bottomDetector').offset();
           let bottomCoords = Math.ceil(bottom.top - referenceOffset.top);
 
           collidables.forEach((collidable) => {
@@ -303,23 +303,7 @@ function moveY(object, direction) {
           if (isMovingUp || isMovingDown) {
                $('.wall').each(function () {
                     if (isColliding($obj, $(this))) {
-                         collisionDetectedY = true;
-                         const collidedWith = this;
-                         const collidedWithOffset = collidedWith.getBoundingClientRect();
-                         const collidedWithHeight = collidedWithOffset.height;
-                         const collidedWithTop = collidedWithOffset.top - 2;
-                         const collidedWithBottom = collidedWithTop + collidedWithHeight;
-
-
-                         if (direction === 'up' && $obj.find('.topDetector').offset().top - 2 <= collidedWithBottom) {
-                              objProperties.position.y = collidedWithBottom + 1;
-                              obj.style.top = `${objProperties.position.y}px`;
-                              collidedY = true;
-                         } else if (direction === 'down' && $obj.find('.bottomDetector').offset().top - 1 >= collidedWithTop) {
-                              objProperties.position.y = collidedWithTop - 2 - $obj.outerHeight();
-                              obj.style.top = `${objProperties.position.y}px`;
-                              collidedY = true;
-                         }
+                         resetY(this);
                     }
                });
 
@@ -343,3 +327,24 @@ function moveY(object, direction) {
      }
      loop();
 }
+
+function resetY(collided) {
+     collisionDetectedY = true;
+     const collidedWith = collided;
+     const collidedWithOffset = collidedWith.getBoundingClientRect();
+     const collidedWithHeight = collidedWithOffset.height;
+     const collidedWithTop = collidedWithOffset.top - 2;
+     const collidedWithBottom = collidedWithTop + collidedWithHeight;
+
+
+     if (direction === 'up' && $obj.find('.topDetector').offset().top - 2 <= collidedWithBottom) {
+          objProperties.position.y = collidedWithBottom + 1;
+          obj.style.top = `${objProperties.position.y}px`;
+          collidedY = true;
+     } else if (direction === 'down' && $obj.find('.bottomDetector').offset().top - 1 >= collidedWithTop) {
+          objProperties.position.y = collidedWithTop - 2 - $obj.outerHeight();
+          obj.style.top = `${objProperties.position.y}px`;
+          collidedY = true;
+     }
+}
+
