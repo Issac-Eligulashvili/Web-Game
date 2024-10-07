@@ -29,7 +29,7 @@ const animationFrames = {
      up: ['/img/character/character_0000_up_1.png', '/img/character/character_0001_up_2.png', '/img/character/character_0002_up_3.png'],
      right: ['/img/character/character_0003_right_1.png', '/img/character/character_0004_right_2.png', '/img/character/character_0005_right_3.png'],
      down: ['/img/character/character_0006_down_1.png', '/img/character/character_0007_down_2.png', '/img/character/character_0008_down_3.png'],
-     left: ['/img/character/character_0009_left_1.png', '/img/character/character_0007_down_2.png', '/img/character/character_0008_down_3.png']
+     left: ['/img/character/character_0009_left_1.png', '/img/character/character_0010_left_2.png', '/img/character/character_0011_left_3.png']
 }
 let animationFrame = 0;
 
