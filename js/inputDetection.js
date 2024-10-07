@@ -1,5 +1,6 @@
 let mode;
 let objectParam;
+let currentDirection;
 
 function changeMode(setMode) {
      mode = setMode;
@@ -8,7 +9,7 @@ function changeMode(setMode) {
 $(document).ready(function () {
      //Detecting Collisions 
 
-     let currentDirection;
+
 
      createHitboxes(objectParam);
 
@@ -75,20 +76,25 @@ $(document).ready(function () {
                } else if (e.key === 'ArrowUp') {
                     jump(objectParam);
                }
-          } else if (mode === 'isometric' && currentDirection === null) {
+          } else if (mode === 'isometric') {
                if (e.key === 'ArrowRight') {
                     moveIso(objectParam, 'right')
+                    currentDirection = 'right';
                } else if (e.key === 'ArrowLeft') {
                     moveIso(objectParam, 'left')
+                    currentDirection = 'left';
                } else if (e.key === 'ArrowUp') {
                     moveIso(objectParam, 'up')
+                    currentDirection = 'up';
                } else if (e.key === 'ArrowDown') {
                     moveIso(objectParam, 'down')
+                    currentDirection = 'down';
                }
           }
      });
 
      $(document).keyup(function (e) {
+          currentDirection = null;
           if (e.key === 'ArrowRight') {
                isMovingRight = false;
                if (mode === 'topDown') {
