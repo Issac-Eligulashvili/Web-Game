@@ -89,7 +89,6 @@ function moveIso(object, direction) {
 
                // Cycle through animation frames
                animationFrame++;
-               console.log(animationFrame);
           }
      }
 }
@@ -99,7 +98,6 @@ function isoCollisions(isoX, isoY) {
      console.log(isoX, isoY);
      // Assuming your SVG tiles have IDs or classes you can query
      const tile = document.querySelector(`#layer_2 #tile_${isoX}_${isoY}`);
-     console.log(tile);
 
      if (tile === null) {
           // No tile at this position
