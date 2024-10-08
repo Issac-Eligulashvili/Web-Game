@@ -89,7 +89,6 @@ function moveIso(object, direction) {
 
                // Cycle through animation frames
                animationFrame++;
-               console.log(animationFrame);
           }
      }
 }
@@ -99,7 +98,6 @@ function isoCollisions(isoX, isoY) {
      console.log(isoX, isoY);
      // Assuming your SVG tiles have IDs or classes you can query
      const tile = document.querySelector(`#layer_2 #tile_${isoX}_${isoY}`);
-     console.log(tile);
 
      if (tile === null) {
           // No tile at this position
@@ -118,8 +116,8 @@ function isoToScreen(isoX, isoY) {
 
 // Converts screen (pixel) coordinates to isometric coordinates
 function screenToIso(screenX, screenY, tileSize) {
-     const isoX = (((2 * screenX) + (4 * screenY) - svg.getAttribute('width')) / (2 * tileSize)) + 1;
-     const isoY = ((4 * screenY) / tileSize) - isoX + 1;
+     const isoX = (((2 * screenX) + (4 * screenY) - svg.getAttribute('width')) / (2 * tileSize));
+     const isoY = ((4 * screenY) / tileSize) - isoX;
 
      // Return the calculated isometric coordinates
      return { isoX: Math.ceil(isoX), isoY: Math.ceil(isoY) };
