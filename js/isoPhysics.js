@@ -118,8 +118,8 @@ function isoToScreen(isoX, isoY) {
 
 // Converts screen (pixel) coordinates to isometric coordinates
 function screenToIso(screenX, screenY, tileSize) {
-     const isoX = (((2 * screenX) + (4 * screenY) - svg.getAttribute('width')) / (2 * tileSize)) + 1;
-     const isoY = ((4 * screenY) / tileSize) - isoX + 1;
+     const isoX = (((2 * screenX) + (4 * screenY) - svg.getAttribute('width')) / (2 * tileSize));
+     const isoY = ((4 * screenY) / tileSize) - isoX;
 
      // Return the calculated isometric coordinates
      return { isoX: Math.ceil(isoX), isoY: Math.ceil(isoY) };

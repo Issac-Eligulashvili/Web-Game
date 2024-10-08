@@ -18,15 +18,27 @@ body {
      src: url(/THE\ BOLD\ FONT\ -\ FREE\ VERSION\ -\ 2023.ttf);
 }
 
+@font-face {
+     font-family: 'Turtle';
+     src: url(/turtlemode.ttf);
+}
+
 .bold-font {
      font-family: 'The Bold Font';
-     letter-spacing: 2px;
+}
+
+.turtle-mode {
+     font-family: 'Turtle';
 }
 
 .header {
      font-size: 7.5rem;
      top: 15%;
      animation-duration: 4s;
+}
+
+.sub-header {
+     bottom: 20%;
 }
 
 .fade-out {
