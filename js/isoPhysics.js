@@ -1,9 +1,11 @@
-let tileSize = 32;
-mapWidth = 24;
-mapHeight = 24;
+
 let currnetAnimation = null;
 
-let layers;
+let numLayers;
+
+const tileSize = 32; // Assuming each tile is 64x64 pixels
+const mapWidth = 24;
+const mapHeight = 24;
 
 
 let svg = document.getElementById('tileMap');
@@ -125,11 +127,11 @@ function screenToIso(screenX, screenY, tileSize) {
 function moveArrow() {
      const arrow = document.querySelector('#arrow');
 
-     layers = 3
+     numLayers = 3
      let fromFrame = { screenX, screenY };
      let toFrame = { screenX, screenY };
-     fromFrame = isoToScreen(mapWidth / 2 - layers, mapHeight + 3);
-     toFrame = isoToScreen(mapWidth / 2 - layers, mapHeight + 1);
+     fromFrame = isoToScreen(mapWidth / 2 - numLayers, mapHeight + 3);
+     toFrame = isoToScreen(mapWidth / 2 - numLayers, mapHeight + 1);
 
      arrow.style.setProperty('--from-top', `${fromFrame.screenY}px`);
      arrow.style.setProperty('--from-left', `${fromFrame.screenX}px`);

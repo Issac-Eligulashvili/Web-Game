@@ -1170,8 +1170,28 @@
                     </g>
                </svg>
                <img src="/img/sprites/arrow.png" class="position-absolute" id="arrow">
+               <div id="scene-2">
+                    <div id="editor">
+                         <canvas id="tileCanvas" width="512" height="512"></canvas>
+                         <div id="palette">
+                              <!-- Add simple color tiles to the palette -->
+                              <div class="tile" data-tile="1" style="background-color: #ff6666;"></div>
+                              <div class="tile" data-tile="2" style="background-color: #66ff66;"></div>
+                              <div class="tile" data-tile="3" style="background-color: #6666ff;"></div>
+                              <div class="tile" data-tile="4" style="background-color: #ffff66;"></div>
+                         </div>
+                    </div>
+
+
+                    <div class="layer-buttons">
+                         <button class="layer-btn">Layer 1</button>
+                         <button class="layer-btn">Layer 2</button>
+                         <button class="layer-btn">Layer 3</button>
+                    </div>
+
+               </div>
           </div>
-          <!-- <div id="wipe-container"></div> -->
+          <div id="wipe-container"></div>
 
 
      </div>
@@ -1179,6 +1199,7 @@
      <h1 class="position-absolute text-white turtle-mode header animate__animated animate__fadeIn">DEVMAP TOOLS</h1>
      <h3 class="text-white position-absolute sub-header bold-font animate__animated animate__fadeIn">A Web Game
           Development Ecosystem</h3>
+
 
 
      <!-- Bootstrap JavaScript Libraries -->
@@ -1197,11 +1218,16 @@
 
      <!-- Generate tilemap -->
 
+
      <!-- Handling Input Detection -->
      <script src="/js/isoPhysics.js"></script>
 
      <!-- Handling Input Detection -->
      <script src="/js/inputDetection.js"></script>
+
+     <!-- Drawing the Map JS -->
+
+     <script src="js/draw.js"></script>
 
      <!-- My JS -->
      <script src="/js/script.js"></script>
