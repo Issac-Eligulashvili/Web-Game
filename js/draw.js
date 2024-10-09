@@ -209,10 +209,10 @@ function downloadSVG() {
 }
 
 // Add a button to download the SVG
-const downloadButton = document.createElement('button');
-downloadButton.textContent = 'Download SVG';
-downloadButton.addEventListener('click', downloadSVG);
-document.body.appendChild(downloadButton);
+// const downloadButton = document.createElement('button');
+// downloadButton.textContent = 'Download SVG';
+// downloadButton.addEventListener('click', downloadSVG);
+// document.body.appendChild(downloadButton);
 
 // Initial render
 renderTilemap();

@@ -74,6 +74,9 @@ function moveIso(object, direction) {
      const isoCoords = screenToIso(newX, newY, tileSize);
      let { x, y } = isoCoords;
 
+     console.log(x, y);
+
+     console.log(isoCollisions(isoCoords.isoX, isoCoords.isoY));
 
      if (!isoCollisions(isoCoords.isoX, isoCoords.isoY)) {
           objProperties.position.x = newX;
@@ -98,6 +101,7 @@ function moveIso(object, direction) {
 function isoCollisions(isoX, isoY) {
      // Assuming your SVG tiles have IDs or classes you can query
      const tile = document.querySelector(`#layer_2 #tile_${isoX}_${isoY}`);
+     console.log(tile);
 
      if (tile === null) {
           // No tile at this position
