@@ -76,9 +76,9 @@ function moveIso(object, direction) {
 
      console.log(x, y);
 
-     console.log(isoCollisions(isoCoords.isoX, isoCoords.isoY));
+     console.log(isoCollisions(x, y));
 
-     if (!isoCollisions(isoCoords.isoX, isoCoords.isoY)) {
+     if (!isoCollisions(x, y)) {
           objProperties.position.x = newX;
           objProperties.position.y = newY;
 
@@ -143,5 +143,10 @@ function moveArrow() {
      arrow.style.setProperty('--to-left', `${toFrame.screenX}px`);
 
 }
+
+$('#arrow').on('click', () => {
+     $('[data-active = "active"]').addClass('slide-out').attr('data-active', 'null');
+     $('[data-active]').next().addClass('slide-in').attr('data-active', 'active');
+})
 
 moveArrow();

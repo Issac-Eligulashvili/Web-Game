@@ -57,6 +57,7 @@ body {
      align-items: center;
      justify-content: center;
      z-index: 2;
+     overflow: hidden;
 }
 
 #object {
@@ -327,8 +328,33 @@ pre {
      border: 1px solid #ccc;
 }
 
+#grid {
+     overflow: hidden;
+}
+
 #scene-2 {
      position: absolute;
      top: 0;
      left: 0;
+     transform: translateX(-100vw) translateY(100vh);
+}
+
+.slide-in {
+     animation: slide-in 2s forwards ease-in-out;
+}
+
+.slide-out {
+     animation: slide-out 2s forwards ease-in-out;
+}
+
+@keyframes slide-in {
+     to {
+          transform: translate(0);
+     }
+}
+
+@keyframes slide-out {
+     to {
+          transform: translateX(100vw) translateY(-100vh);
+     }
 }
