@@ -34,11 +34,12 @@ body {
 .header {
      font-size: 7.5rem;
      top: 15%;
-     animation-duration: 4s;
+     animation-duration: 3s;
 }
 
 .sub-header {
      bottom: 20%;
+     animation-duration: 3s;
 }
 
 .fade-out {
@@ -73,6 +74,10 @@ body {
 
 .grid {
      position: relative;
+     animation-duration: 3s;
+}
+
+.floating {
      animation: floating 3s infinite ease-in-out;
 }
 
@@ -190,18 +195,37 @@ body {
      }
 }
 
-@keyframes run {}
-
 .h-1 {
      height: 1px;
 }
 
-svg {
-     /* width: 100%;
-     height: 100%;
-     pointer-events: none; */
-}
-
 .timeline2 {
      filter: grayscale(100%);
+}
+
+#arrow {
+     animation: arrowSlide 5s ease-in-out infinite;
+}
+
+#arrow:hover {
+     animation-play-state: paused;
+     cursor: pointer;
+
+}
+
+@keyframes arrowSlide {
+     0% {
+          top: var(--from-top);
+          left: var(--from-left);
+     }
+
+     50% {
+          top: var(--to-top);
+          left: var(--to-left);
+     }
+
+     100% {
+          top: var(--from-top);
+          left: var(--from-left);
+     }
 }

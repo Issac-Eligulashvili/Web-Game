@@ -3,6 +3,9 @@ mapWidth = 24;
 mapHeight = 24;
 let currnetAnimation = null;
 
+let layers;
+
+
 let svg = document.getElementById('tileMap');
 let $svg = $('#tileMap');
 
@@ -37,7 +40,7 @@ let animationFrame = 0;
 const player = $("#object");
 
 function moveIso(object, direction) {
-     console.log(object);
+
      const obj = document.getElementById(`${object}`);
 
      let velX = objProperties.velocity.x;
@@ -67,13 +70,10 @@ function moveIso(object, direction) {
 
      // Convert new screen position back to isometric grid
      const isoCoords = screenToIso(newX, newY, tileSize);
-     console.log(isoCoords);
      let { x, y } = isoCoords;
 
-     console.log(isoCoords.isoX, isoCoords.isoY);
 
      if (!isoCollisions(isoCoords.isoX, isoCoords.isoY)) {
-          console.log('not colliding');
           objProperties.position.x = newX;
           objProperties.position.y = newY;
 
@@ -83,7 +83,6 @@ function moveIso(object, direction) {
           });
 
           if (currnetAnimation) {
-               console.log(animationFrames[currnetAnimation]);
                const frame = animationFrames[currnetAnimation][animationFrame % animationFrames[currnetAnimation].length];
                obj.style.backgroundImage = `url(${frame})`;
 
@@ -95,7 +94,6 @@ function moveIso(object, direction) {
 
 // Collision detection based on the isometric grid
 function isoCollisions(isoX, isoY) {
-     console.log(isoX, isoY);
      // Assuming your SVG tiles have IDs or classes you can query
      const tile = document.querySelector(`#layer_2 #tile_${isoX}_${isoY}`);
 
@@ -122,3 +120,22 @@ function screenToIso(screenX, screenY, tileSize) {
      // Return the calculated isometric coordinates
      return { isoX: Math.ceil(isoX), isoY: Math.ceil(isoY) };
 }
+
+//setting initial position of the arrow
+function moveArrow() {
+     const arrow = document.querySelector('#arrow');
+
+     layers = 3
+     let fromFrame = { screenX, screenY };
+     let toFrame = { screenX, screenY };
+     fromFrame = isoToScreen(mapWidth / 2 - layers, mapHeight + 3);
+     toFrame = isoToScreen(mapWidth / 2 - layers, mapHeight + 1);
+
+     arrow.style.setProperty('--from-top', `${fromFrame.screenY}px`);
+     arrow.style.setProperty('--from-left', `${fromFrame.screenX}px`);
+     arrow.style.setProperty('--to-top', `${toFrame.screenY}px`);
+     arrow.style.setProperty('--to-left', `${toFrame.screenX}px`);
+
+}
+
+moveArrow();

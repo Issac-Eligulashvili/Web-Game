@@ -14,7 +14,6 @@ $(document).ready(function () {
      createHitboxes(objectParam);
 
 
-     console.log(mode);
 
      if (mode === 'topDown' || mode === 'isometric') {
           currentDirection = null;
@@ -22,7 +21,6 @@ $(document).ready(function () {
           currentDirection = 'moving'
      }
 
-     console.log(currentDirection);
 
      // fall('object', 'floor');
      $(document).keydown(function (e) {
@@ -122,7 +120,6 @@ $(document).ready(function () {
           const id = e.currentTarget.id;
           e.preventDefault(); // Prevent the default link behavior
           document.body.classList.add('fade-out'); // Add fade-out class
-          console.log('pressed');
 
           setTimeout(() => {
                window.location.href = `${id}.html`; // Navigate after animation
