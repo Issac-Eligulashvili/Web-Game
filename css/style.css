@@ -66,11 +66,11 @@ body {
      left: 272px;
      width: 13px;
      height: 17px;
-
+     background-color: blue;
      border-radius: 0%;
-     background-image: url(/img/character/character_0003_right_1.png);
+     /* background-image: url(/img/character/character_0003_right_1.png);
      background-repeat: no-repeat;
-     background-position: 0, 2px;
+     background-position: 0, 2px; */
 }
 
 .grid {
@@ -237,7 +237,6 @@ body {
 }
 
 #tileCanvas {
-     border: 1px solid #ccc;
      cursor: crosshair;
 }
 

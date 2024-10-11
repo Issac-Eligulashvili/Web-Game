@@ -147,6 +147,12 @@ function moveArrow() {
 $('#arrow').on('click', () => {
      $('[data-active = "active"]').addClass('slide-out').attr('data-active', 'null');
      $('[data-active]').next().addClass('slide-in').attr('data-active', 'active');
+     $('#header1').addClass('animate__fadeOutDown').css({
+          'animation-duration': '2s',
+     });
+     $('#header2').addClass('animate__fadeInDown').css({
+          'animation-duration': '2s',
+     });
 })
 
 moveArrow();

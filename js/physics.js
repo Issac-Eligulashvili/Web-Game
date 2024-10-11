@@ -19,8 +19,8 @@ let collidedX = false;
 //storing object data
 let objProperties = {
      velocity: {
-          x: 32,
-          y: 16,
+          x: 3,
+          y: 2,
      },
      position: {
           x: 0,
@@ -96,7 +96,7 @@ function fall(object, floor) {
 
      const obj = document.querySelector(`#${object}`);
      console.log(obj);
-     const collidables = document.querySelectorAll(`#${floor}`);
+     const collidables = document.querySelectorAll(`.${floor}`);
      const referenceOffset = $('#container').offset();
 
 

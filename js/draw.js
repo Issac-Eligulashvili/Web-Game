@@ -40,7 +40,8 @@ document.querySelectorAll('.tile').forEach(tile => {
 document.querySelectorAll('.layer-btn').forEach((button, index) => {
      button.addEventListener('click', function () {
           currentLayer = index; // Switch to selected layer
-          renderTilemap(); // Re-render the map
+          renderTilemap();
+          drawGrid(); // Re-render the map
      });
 });
 
@@ -51,6 +52,7 @@ function placeTileAtMouse(event) {
      if (x < mapWidth && y < mapHeight) {
           layers[currentLayer][y][x] = selectedTile; // Place tile on current layer
           renderTilemap();
+          drawGrid();
      }
 }
 
@@ -80,14 +82,16 @@ tileCanvas.addEventListener('mouseleave', function () {
 });
 // Converts screen coordinates to isometric coordinates
 function screenToIso(screenX, screenY) {
-     const isoX = Math.floor((screenX - (tileCanvas.width / 2)) / (tileSize / 2) + screenY / (tileSize / 4) / 2);
-     const isoY = Math.floor((screenY / (tileSize / 4)) / 2 - (screenX - (tileCanvas.width / 2)) / (tileSize / 2) / 2);
+     const isoX = Math.floor((screenX - tileCanvas.width / 2 + 2 * screenY) / tileSize);
+     const isoY = Math.floor((screenY - (screenX - tileCanvas.width / 2) / 2) / (tileSize / 2));
      return { x: isoX, y: isoY };
 }
 
 function highlightTile(isoX, isoY) {
      ctx.clearRect(0, 0, tileCanvas.width, tileCanvas.height); // Clear canvas to redraw the grid
      renderTilemap(); // Re-render all layers
+     drawGrid(); // Ensure the grid is drawn after rendering the tilemap
+
      if (isoX >= 0 && isoY >= 0 && isoX < mapWidth && isoY < mapHeight) {
           const { screenX, screenY } = isoToScreen(isoX, isoY);
           ctx.strokeStyle = 'rgba(255, 0, 0, 0.5)'; // Color for highlighting
@@ -95,6 +99,7 @@ function highlightTile(isoX, isoY) {
           ctx.strokeRect(screenX - tileSize / 2, screenY - tileSize / 4, tileSize, tileSize); // Adjust for isometric position
      }
 }
+
 
 
 
@@ -219,29 +224,32 @@ renderTilemap();
 
 // Function to draw grid lines
 function drawGrid() {
-     ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)'; // Light grid color
+     ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)'; // Light grid color
      ctx.beginPath();
 
      // Draw vertical lines
-     for (let x = -mapWidth; x <= mapWidth; x++) {
-          const isoX = (x) * (tileSize / 2);
-          const isoY1 = -mapHeight * tileSize / 4; // Start from top of the canvas
-          const isoY2 = mapHeight * tileSize / 4; // Extend to bottom
-          ctx.moveTo(isoX + (tileCanvas.width / 2), isoY1); // Adjust X to be centered
-          ctx.lineTo(isoX + (tileCanvas.width / 2), isoY2); // Adjust X to be centered
+     for (let x = 0; x <= mapWidth; x++) {
+          let linePosInitial = isoToScreen(x, 0);
+          let lineposFinal = isoToScreen(x, mapWidth);
+
+          ctx.moveTo(linePosInitial.screenX, linePosInitial.screenY - tileSize / 4)
+          ctx.lineTo(lineposFinal.screenX, lineposFinal.screenY - tileSize / 4)
+          // ctx.moveTo(isoX + (tileCanvas.width / 2), isoY1 + (tileCanvas.height / 2)); // Adjust X to be centered
+          // ctx.lineTo(isoX + (tileCanvas.width / 2), isoY2 + (tileCanvas.height / 2)); // Adjust Y to be centered
      }
 
-     // Draw horizontal lines
+     //Draw horizontal lines
      for (let y = 0; y <= mapHeight; y++) {
-          const isoY = y * (tileSize / 4);
-          const isoX1 = -mapWidth * tileSize / 2 + (tileCanvas.width / 2); // Start from left of the canvas
-          const isoX2 = mapWidth * tileSize / 2 + (tileCanvas.width / 2); // Extend to right
-          ctx.moveTo(isoX1, isoY);
-          ctx.lineTo(isoX2, isoY);
+          let linePosInitial = isoToScreen(0, y);
+          let lineposFinal = isoToScreen(mapHeight, y);
+
+          ctx.moveTo(linePosInitial.screenX, linePosInitial.screenY - tileSize / 4)
+          ctx.lineTo(lineposFinal.screenX, lineposFinal.screenY - tileSize / 4)
      }
 
      ctx.stroke();
 }
 
-// Call drawGrid to render the grid
+
 drawGrid();
+

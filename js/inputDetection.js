@@ -24,10 +24,6 @@ $(document).ready(function () {
 
      // fall('object', 'floor');
      $(document).keydown(function (e) {
-          const player = document.getElementById('#object');
-          let playerOffset = $('#object').offset();
-          const { playerIsoX, playerIsoY } = screenToIso(playerOffset.left, playerOffset.top, 64, 64);
-
           // Helper function to move in a direction
           function handleMovement(direction, axis) {
                if (direction === 'right' && !isMovingRight) {
