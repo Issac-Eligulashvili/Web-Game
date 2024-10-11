@@ -74,8 +74,6 @@ function moveIso(object, direction) {
      const isoCoords = screenToIso(newX, newY, tileSize);
      let { x, y } = isoCoords;
 
-     console.log(x, y);
-
      console.log(isoCollisions(x, y));
 
      if (!isoCollisions(x, y)) {

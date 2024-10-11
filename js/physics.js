@@ -106,35 +106,42 @@ function fall(object, floor) {
           const objRight = $(`#${object}`).find('.leftDetector').offset().left;
           const objLeft = $(`#${object}`).find('.rightDetector').offset().left;
 
-          if (!isGrounded) {
-               objProperties.velocity.y += gravity;
-          }
           objProperties.position.y += objProperties.velocity.y;
 
           obj.style.top = `${objProperties.position.y}px`;
           const bottom = $(`#${object}`).find('.bottomDetector').offset();
           let bottomCoords = Math.ceil(bottom.top - referenceOffset.top);
 
-          collidables.forEach((collidable) => {
+          $('.collidable').each(function () {
                //defining variables for the boudns/colissions
                let collidableTop, collidableBottom, collidableLeft, collidableRight;
 
+
                //check to see if it is an svg or actual dom element
-               if (collidable instanceof SVGElement) {
-                    //use getBoundingClientRect for svg elements
-                    const bounds = collidable.getBoundingClientRect();
-                    collidableTop = Math.ceil(bounds.top + window.scrollY - referenceOffset.top);
-                    collidableBottom = collidableTop + bounds.height;
-                    collidableLeft = Math.ceil(bounds.left + window.scrollX - referenceOffset.left);
-                    collidableRight = collidableLeft + bounds.width;
-               } else {
+               // if (this instanceof SVGElement) {
+               //      //use getBoundingClientRect for svg elements
+               //      const collidedWith = $(this);
+               //      const offsets = collidedWith.offset();
+               //      const height = $(this).outerHeight();
+               //      const width = $(this).outerWidth();
+
+               //      console.log(collidedWith);
+
+               //      collidableTop = Math.ceil(offsets.top - referenceOffset.top);
+               //      collidableBottom = collidableTop + height;
+               //      collidableLeft = Math.ceil(offsets.left - referenceOffset.left);
+               //      collidableRight = collidableLeft + width;
+               // } else
+               {
                     //Use normal offset for normal dom elements
-                    const collidableOffset = $(collidable).offset();
+                    const collidableOffset = $(this).offset();
+
+
 
                     collidableTop = Math.ceil(collidableOffset.top - referenceOffset.top);
-                    collidableBottom = collidableTop + collidable.offsetHeight;
+                    collidableBottom = collidableTop + $(this).outerHeight();
                     collidableLeft = Math.ceil(collidableOffset.left - referenceOffset.left);
-                    collidableRight = collidableLeft + collidable.offsetWidth;
+                    collidableRight = collidableLeft + $(this).outerWidth();
                }
 
 
@@ -145,9 +152,11 @@ function fall(object, floor) {
                     objLeft > collidableLeft &&
                     objRight < collidableRight &&
                     // bottomCoords <= collidableTop + obj.offsetHeight / 2 &&
-                    objProperties.velocity.y >= 0
+                    objProperties.velocity.y >= 0 &&
+                    !isGrounded
                ) {
-                    objProperties.position.y = collidableTop - obj.offsetHeight;
+                    objProperties.position.y = collidableTop - obj.offsetHeight - 2;
+
                     objProperties.velocity.y = 0;
                     groundedThisFrame = true;
                     objProperties.jumping = false;
@@ -156,7 +165,11 @@ function fall(object, floor) {
                     objProperties.jumping = true;
                }
           })
-          isGrounded = groundedThisFrame
+          isGrounded = groundedThisFrame;
+
+          if (!isGrounded) {
+               objProperties.velocity.y += gravity;
+          }
 
           requestAnimationFrame(loop);
      }
