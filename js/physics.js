@@ -91,91 +91,93 @@ function createHitboxes(object) {
      loop();
 }
 
-//gravity
-function fall(object, floor) {
+function isCollidingY($div1, $div2) {
+     let d2Offset = $div2.offset();
+     let d2Height, d2Top, d2Bottom, d2Left, d2Right, d2Width;
 
-     const obj = document.querySelector(`#${object}`);
-     console.log(obj);
-     const collidables = document.querySelectorAll(`.${floor}`);
-     const referenceOffset = $('#container').offset();
+     let d1Height = $div1.outerHeight(true);
+     let d1Width = $div1.outerWidth(true);
+     let d1Top = $div1.offset().top;
+     let d1Bottom = $div1.find('.bottomDetector').offset().top + 1;
+     let d1Left = $div1.offset().left;
+     let d1Right = d1Left + d1Width;
 
+     let futureBottom = d1Bottom + objProperties.velocity.y;
 
+     if ($div2[0] instanceof SVGElement) {
+          // Use getBBox for SVG elements to get dimensions
+          const bbox = $div2[0].getBoundingClientRect();
 
-
-     const loop = () => {
-          const objRight = $(`#${object}`).find('.leftDetector').offset().left;
-          const objLeft = $(`#${object}`).find('.rightDetector').offset().left;
-
-          objProperties.position.y += objProperties.velocity.y;
-
-          obj.style.top = `${objProperties.position.y}px`;
-          const bottom = $(`#${object}`).find('.bottomDetector').offset();
-          let bottomCoords = Math.ceil(bottom.top - referenceOffset.top);
-
-          $('.collidable').each(function () {
-               //defining variables for the boudns/colissions
-               let collidableTop, collidableBottom, collidableLeft, collidableRight;
-
-
-               //check to see if it is an svg or actual dom element
-               // if (this instanceof SVGElement) {
-               //      //use getBoundingClientRect for svg elements
-               //      const collidedWith = $(this);
-               //      const offsets = collidedWith.offset();
-               //      const height = $(this).outerHeight();
-               //      const width = $(this).outerWidth();
-
-               //      console.log(collidedWith);
-
-               //      collidableTop = Math.ceil(offsets.top - referenceOffset.top);
-               //      collidableBottom = collidableTop + height;
-               //      collidableLeft = Math.ceil(offsets.left - referenceOffset.left);
-               //      collidableRight = collidableLeft + width;
-               // } else
-               {
-                    //Use normal offset for normal dom elements
-                    const collidableOffset = $(this).offset();
-
-
-
-                    collidableTop = Math.ceil(collidableOffset.top - referenceOffset.top);
-                    collidableBottom = collidableTop + $(this).outerHeight();
-                    collidableLeft = Math.ceil(collidableOffset.left - referenceOffset.left);
-                    collidableRight = collidableLeft + $(this).outerWidth();
-               }
-
-
-
-               //check for collisions 
-               if (
-                    bottomCoords >= collidableTop && // Check within vertical range
-                    objLeft > collidableLeft &&
-                    objRight < collidableRight &&
-                    // bottomCoords <= collidableTop + obj.offsetHeight / 2 &&
-                    objProperties.velocity.y >= 0 &&
-                    !isGrounded
-               ) {
-                    objProperties.position.y = collidableTop - obj.offsetHeight - 2;
-
-                    objProperties.velocity.y = 0;
-                    groundedThisFrame = true;
-                    objProperties.jumping = false;
-               } else if (isGrounded && (objRight < collidableRight || objLeft > collidableLeft)) {
-                    groundedThisFrame = false;
-                    objProperties.jumping = true;
-               }
-          })
-          isGrounded = groundedThisFrame;
-
-          if (!isGrounded) {
-               objProperties.velocity.y += gravity;
-          }
-
-          requestAnimationFrame(loop);
+          d2Height = bbox.height;
+          d2Width = bbox.width;
+          d2Top = bbox.top;
+          d2Bottom = d2Top + d2Height;
+          d2Left = bbox.left;
+          d2Right = d2Left + d2Width;
+     } else {
+          d2Height = $div2.outerHeight(true);
+          d2Width = $div2.outerWidth(true);
+          d2Top = d2Offset.top;
+          d2Bottom = d2Top + d2Height;
+          d2Left = d2Offset.left;
+          d2Right = d2Left + d2Width;
      }
 
-     loop();
+     // Only check vertical collision if within horizontal bounds (X-axis)
+     const isWithinHorizontalBounds = !(d1Right < d2Left || d1Left > d2Right);
 
+     // Only return true for vertical collisions if within horizontal bounds
+     if (isWithinHorizontalBounds) {
+          return futureBottom > d2Top && d1Top < d2Bottom; // Vertical collision check
+     }
+
+     return false; // No vertical collision if not in horizontal bounds
+}
+
+
+
+function isCollidingX($div1, $div2) {
+     let d2Offset = $div2.offset();
+     let d2Width, d2Left, d2Right, d2Top, d2Bottom;
+
+     let d1Height = $div1.outerHeight(true);
+     let d1Width = $div1.outerWidth(true);
+     let d1Left = $div1.offset().left;
+     let d1Right = d1Left + d1Width;
+     let d1Top = d1Offset.top;
+     let d1Bottom = d1Top + d1Height;
+
+     let futureRight = d1Right + objProperties.velocity.x;
+     let futureLeft = d1Left - objProperties.velocity.x;
+
+     if ($div2[0] instanceof SVGElement) {
+          // Use getBoundingClientRect for SVG elements
+          const bbox = $div2[0].getBoundingClientRect();
+
+          d2Width = bbox.width;
+          d2Height = bbox.height;
+          d2Left = bbox.left;
+          d2Right = d2Left + d2Width;
+          d2Top = bbox.top;
+          d2Bottom = d2Top + d2Height;
+     } else {
+          d2Width = $div2.outerWidth(true);
+          d2Height = $div2.outerHeight(true);
+          d2Left = d2Offset.left;
+          d2Right = d2Left + d2Width;
+          d2Top = d2Offset.top;
+          d2Bottom = d2Top + d2Height;
+     }
+
+     const isWithinVeritcalBounds = (d1Bottom > d2Top + 2);
+     const isBelow = d1Top > d2Bottom;
+
+     if (isWithinVeritcalBounds && !isBelow) {
+          return !(futureRight < d2Left || futureLeft > d2Right)
+     }
+
+     // Check if the horizontal bounds of the objects overlap
+     return false;
 }
 
 function topDownMovement(object) {
@@ -189,27 +191,6 @@ function topDownMovement(object) {
      }
 
      loop();
-}
-
-function isColliding($div1, $div2) {
-     let d2Offset = $div2.offset();
-
-     let d1Height = $div1.outerHeight(true);
-     let d1Width = $div1.outerWidth(true);
-     let d2Height = $div2.outerHeight(true);
-     let d2Width = $div2.outerWidth(true);
-
-     let d1Top = d1Offset.top;
-     let d1Bottom = d1Top + d1Height;
-     let d1Left = d1Offset.left;
-     let d1Right = d1Offset.left + d1Width;
-
-     let d2Top = d2Offset.top;
-     let d2Bottom = d2Offset.top + d2Height;
-     let d2Left = d2Offset.left;
-     let d2Right = d2Offset.left + d2Width;
-
-     return !(d1Bottom < d2Top || d1Top > d2Bottom || d1Right < d2Left || d1Left > d2Right);
 }
 
 //horizontal hitbox detection
@@ -237,10 +218,10 @@ function checkBounds(object, container) {
      loop();
 }
 
-function jump(object) {
-     const obj = $(`#${object}`)
+function jump() {
      if (isGrounded) {
           isGrounded = false;
+          groundedThisFrame = false;
           objProperties.jumping = true;
           objProperties.velocity.y += jumpForce;
      }
@@ -252,27 +233,39 @@ function move(object, direction) {
      const $obj = $(`#${object}`);
 
      const loop = () => {
-          let collisionDetectedX = false;
           if (isMovingRight || isMovingLeft) { //Check if is moving is true
-               $('.wall').each(function () {
+               $('.floor').each(function () {
                     // element == this
-                    if (isColliding($obj, $(this))) {
+                    if (isCollidingX($obj, $(this))) {
                          collisionDetectedX = true;
                          const collidedWith = this;
+                         console.log(collidedWith);
+                         let collidedWithOffset, collidedWithWidth, collidedWithLeft, collidedWithRight;
                          //getting the X data of the object collided with 
-                         const collidedWithOffset = collidedWith.getBoundingClientRect(); //getting all of its location data
-                         const collidedWithWidth = collidedWithOffset.width; //getting the width of the object
-                         const collidedWithLeft = collidedWithOffset.left - 2; //getting the left bound of the object
-                         const collidedWithRight = collidedWithLeft + collidedWithWidth; //getting the right bound of the object
+                         if (collidedWith instanceof SVGElement) {
 
-                         if (direction === 'right' && $obj.find('.rightDetector').offset().left - 2 >= collidedWithLeft) {
-                              objProperties.position.x = collidedWithLeft - $obj.outerWidth() - 1;
-                              obj.style.left = `${objProperties.position.y}px`;
+                              collidedWithOffset = collidedWith.getBoundingClientRect(); //getting all of its location data
+                              collidedWithWidth = collidedWithOffset.width; //getting the width of the object
+                              collidedWithLeft = collidedWithOffset.left - 2; //getting the left bound of the object
+                              collidedWithRight = collidedWithLeft + collidedWithWidth; //getting the right bound of the object
+                         } else {
+                              collidedWithOffset = collidedWith.getBoundingClientRect(); //getting all of its location data
+                              collidedWithWidth = collidedWithOffset.width; //getting the width of the object
+                              collidedWithLeft = collidedWithOffset.left - 2; //getting the left bound of the object
+                              collidedWithRight = collidedWithLeft + collidedWithWidth; //getting the right bound of the object
+                         }
+
+
+                         if (direction === 'right') {
+                              objProperties.position.x = collidedWithLeft - $obj.outerWidth();
+                              obj.style.left = `${objProperties.position.x}px`;
                               collidedX = true;
+                              objProperties.velocity.x = 0;
 
-                         } else if (direction === 'left' && $obj.find('.leftDetector').offset().left - 2 <= collidedWithRight) {
-                              objProperties.position.x = collidedWithRight + 1;
-                              obj.style.left = `${objProperties.position.y}px`;
+                         } else if (direction === 'left') {
+                              objProperties.position.x = collidedWithRight + 3;
+                              obj.style.left = `${objProperties.position.x}px`;
+                              objProperties.velocity.x = 0;
                               collidedX = true;
                          }
                     }
@@ -281,8 +274,12 @@ function move(object, direction) {
                if (!collidedX) {
                     //change positionX variable based on user input.
                     if (direction === 'left' && !collidedX) {
+                         console.log('collidedX');
+                         objProperties.velocity.x = 3;
                          objProperties.position.x -= objProperties.velocity.x;
                     } else if (direction === 'right' && !collidedX) {
+                         console.log('collidedX');
+                         objProperties.velocity.x = 3;
                          objProperties.position.x += objProperties.velocity.x; // Use constant speed
                     }
                }
@@ -361,3 +358,62 @@ function resetY(collided) {
      }
 }
 
+//gravity
+function fall(object, floor) {
+     const obj = document.querySelector(`#${object}`);
+     const $obj = $(`#${object}`);
+     const referenceOffset = $('#container').offset();
+
+     let terminalVelocity = 10;
+     const loop = () => {
+          groundedThisFrame = false;
+
+          // Predict the future Y position
+          const futureY = objProperties.position.y + objProperties.velocity.y + $obj.outerHeight();
+
+
+          $('.floor').each(function () {
+               if (isCollidingY($obj, $(this))) {
+                    if (objProperties.velocity.y >= 0) {
+                         // Get the top of the floor element
+                         const floorTop = Math.round($(this).offset().top - referenceOffset.top);
+
+                         // Check if the future position would collide with the floor
+                         if (futureY > floorTop) {
+                              // Snap the player to the floor before collision happens
+                              if (objProperties.velocity.x != 0) {
+                                   console.log(objProperties.velocity.x);
+                                   objProperties.position.y = floorTop - $obj.outerHeight() + 1;
+                              }
+                              objProperties.velocity.y = 0;
+                              groundedThisFrame = true;
+                              objProperties.jumping = false;
+                         }
+
+                         return false;
+                    }
+               }
+          });
+
+          isGrounded = groundedThisFrame;
+
+          // If not grounded, continue applying gravity
+          if (!isGrounded) {
+               objProperties.velocity.y += gravity;
+               if (objProperties.velocity.y > terminalVelocity) {
+                    objProperties.velocity.y = terminalVelocity;
+               }
+          }
+
+          // Update the player's position only if there's no collision
+          if (!groundedThisFrame) {
+               objProperties.position.y += objProperties.velocity.y;
+          }
+          obj.style.top = `${Math.round(objProperties.position.y)}px`;
+
+          // Request the next frame
+          requestAnimationFrame(loop);
+     };
+
+     loop();
+}

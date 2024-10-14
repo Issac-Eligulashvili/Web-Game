@@ -1,4 +1,3 @@
-
 let currnetAnimation = null;
 
 let numLayers;

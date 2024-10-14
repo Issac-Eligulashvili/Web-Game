@@ -28,11 +28,11 @@ $(document).ready(function () {
           function handleMovement(direction, axis) {
                if (direction === 'right' && !isMovingRight) {
                     isMovingRight = true;
-                    move(objectParam, 'right', 'container');
+                    move(objectParam, 'right');
                     currentDirection = 'right';
                } else if (direction === 'left' && !isMovingLeft) {
                     isMovingLeft = true;
-                    move(objectParam, 'left', 'container');
+                    move(objectParam, 'left');
                     currentDirection = 'left';
                } else if (axis === 'y') {
                     if (direction === 'up' && !isMovingUp) {
@@ -64,9 +64,9 @@ $(document).ready(function () {
                }
           } else if (mode === 'platformer') {
                if (e.key === 'ArrowRight') {
-                    handleMovement('right');
+                    handleMovement('right', 'x');
                } else if (e.key === 'ArrowLeft') {
-                    handleMovement('left');
+                    handleMovement('left', 'x');
                } else if (e.key === 'ArrowUp') {
                     jump(objectParam);
                }
